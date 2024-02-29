@@ -35,7 +35,7 @@ static_resources:
                       "@type": type.googleapis.com/envoy.extensions.filters.http.ext_proc.v3.ExternalProcessor
                       grpc_service:
                         envoy_grpc:
-                          cluster_name: payload-limit
+                          cluster_name: caching
                         timeout: 30s
                       failure_mode_allow: true
                       message_timeout: 0.2s
@@ -43,7 +43,7 @@ static_resources:
                         request_header_mode: SEND
                         response_header_mode: SEND
                         request_body_mode: BUFFERED
-                        response_body_mode: BUFFERED
+                        response_body_mode: BUFFERED # can't be 'NONE'
                         request_trailer_mode: SKIP
                         response_trailer_mode: SKIP
                   - name: envoy.filters.http.router
@@ -89,19 +89,19 @@ static_resources:
                   socket_address:
                     address: upstream
                     port_value: 8000
-  - name: payload-limit
+  - name: caching
     dns_lookup_family: V4_ONLY
     lb_policy: LEAST_REQUEST
     load_assignment:
-      cluster_name: payload-limit
+      cluster_name: caching
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: payload-limit
+                address: caching
                 port_value: 50051
-            hostname: payload-limit
+            hostname: caching
     type: LOGICAL_DNS
     typed_extension_protocol_options:
       envoy.extensions.upstreams.http.v3.HttpProtocolOptions:

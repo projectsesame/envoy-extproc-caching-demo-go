@@ -1,4 +1,4 @@
-module github.com/projectsesame/envoy-extproc-payloadlimit-demo-go
+module github.com/projectsesame/envoy-extproc-caching-demo-go
 
 go 1.21
 

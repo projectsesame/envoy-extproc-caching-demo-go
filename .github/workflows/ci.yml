@@ -31,4 +31,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: release.daocloud.io/skoala/envoy-extproc-payloadlimit-demo-go:${{ github.sha }}
+          tags: release.daocloud.io/skoala/envoy-extproc-caching-demo-go:${{ github.sha }}
