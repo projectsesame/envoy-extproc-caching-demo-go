@@ -19,4 +19,4 @@ require (
 	google.golang.org/protobuf v1.32.0 // indirect
 )
 
-replace github.com/wrossmorrow/envoy-extproc-sdk-go => github.com/izturn/envoy-extproc-sdk-go v0.0.2
+replace github.com/wrossmorrow/envoy-extproc-sdk-go => github.com/izturn/envoy-extproc-sdk-go v0.0.3

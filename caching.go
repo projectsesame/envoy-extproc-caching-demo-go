@@ -50,7 +50,7 @@ func (s *cachingRequestProcessor) GetOptions() *ep.ProcessingOptions {
 
 func calcAndSetPathDigest(ctx *ep.RequestContext) string {
 	hasher := sha256.New()
-	//hasher.Write([]byte(ctx.FullPath))
+	hasher.Write([]byte(ctx.FullPath))
 	digest := hex.EncodeToString(hasher.Sum(nil))
 	ctx.SetValue(digestKey, digest)
 	return digest
