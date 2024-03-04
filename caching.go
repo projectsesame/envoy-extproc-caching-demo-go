@@ -56,7 +56,7 @@ func calcAndSetPathDigest(ctx *ep.RequestContext) string {
 	return digest
 
 }
-func (s *cachingRequestProcessor) ProcessRequestHeaders(ctx *ep.RequestContext, headers map[string][]string, headerRawValues map[string][]byte) error {
+func (s *cachingRequestProcessor) ProcessRequestHeaders(ctx *ep.RequestContext, headers ep.AllHeaders) error {
 	if ctx.Method != http.MethodGet {
 		return ctx.ContinueRequest()
 	}
@@ -66,7 +66,7 @@ func (s *cachingRequestProcessor) ProcessRequestHeaders(ctx *ep.RequestContext, 
 	if !ok {
 		return ctx.ContinueRequest()
 	}
-	return ctx.CancelRequest(200, map[string]string{}, string(body))
+	return ctx.CancelRequest(200, map[string]ep.HeaderValue{}, string(body))
 
 }
 
@@ -74,11 +74,11 @@ func (s *cachingRequestProcessor) ProcessRequestBody(ctx *ep.RequestContext, bod
 	return ctx.ContinueRequest()
 }
 
-func (s *cachingRequestProcessor) ProcessRequestTrailers(ctx *ep.RequestContext, trailers map[string][]string, rawValues map[string][]byte) error {
+func (s *cachingRequestProcessor) ProcessRequestTrailers(ctx *ep.RequestContext, trailers ep.AllHeaders) error {
 	return ctx.ContinueRequest()
 }
 
-func (s *cachingRequestProcessor) ProcessResponseHeaders(ctx *ep.RequestContext, headers map[string][]string, rawValues map[string][]byte) error {
+func (s *cachingRequestProcessor) ProcessResponseHeaders(ctx *ep.RequestContext, headers ep.AllHeaders) error {
 	return ctx.ContinueRequest()
 }
 
@@ -90,7 +90,7 @@ func (s *cachingRequestProcessor) ProcessResponseBody(ctx *ep.RequestContext, bo
 	return ctx.ContinueRequest()
 }
 
-func (s *cachingRequestProcessor) ProcessResponseTrailers(ctx *ep.RequestContext, trailers map[string][]string, rawValues map[string][]byte) error {
+func (s *cachingRequestProcessor) ProcessResponseTrailers(ctx *ep.RequestContext, trailers ep.AllHeaders) error {
 	return ctx.ContinueRequest()
 }
 
