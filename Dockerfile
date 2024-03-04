@@ -20,9 +20,9 @@ FROM busybox
 COPY --from=0 /extproc /bin/extproc
 RUN chmod +x /bin/extproc
 
-ARG EXAMPLE=payload-limit
+ARG EXAMPLE=caching
 
 EXPOSE 50051
 
 ENTRYPOINT [ "/bin/extproc" ]
-CMD [ "payload-limit", "--log-stream", "--log-phases", "payload-limit", "32"  ]
+CMD [ "caching", "--log-stream", "--log-phases" ]
