@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caching-demo
+  namespace: caching-demo
+  annotations:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: caching-demo
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: caching-demo
+    spec:
+      containers:
+        - name: caching-demo-container
+          image: >-
+            release.daocloud.io/skoala/envoy-extproc-caching-demo-go@sha256:2a13ee29c85f6a5f949f1ae2673c6a86a8005b57a487930199a08cd80f02269f
+          ports:
+            - containerPort: 50051
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: caching-demo
+  namespace: caching-demo
+  annotations:
+spec:
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051
+      nodePort: 31928
+  selector:
+    app: caching-demo
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
+
+---
+
+
