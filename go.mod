@@ -2,13 +2,11 @@ module github.com/projectsesame/envoy-extproc-caching-demo-go
 
 go 1.21
 
-require (
-	github.com/envoyproxy/go-control-plane v0.12.0
-	github.com/wrossmorrow/envoy-extproc-sdk-go v0.0.21
-)
+require github.com/wrossmorrow/envoy-extproc-sdk-go v0.0.21
 
 require (
 	github.com/cncf/xds/go v0.0.0-20231128003011-0fa0005c9caa // indirect
+	github.com/envoyproxy/go-control-plane v0.12.0 // indirect
 	github.com/envoyproxy/protoc-gen-validate v1.0.4 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	golang.org/x/net v0.21.0 // indirect
@@ -19,4 +17,4 @@ require (
 	google.golang.org/protobuf v1.32.0 // indirect
 )
 
-replace github.com/wrossmorrow/envoy-extproc-sdk-go => github.com/izturn/envoy-extproc-sdk-go v0.0.3
+replace github.com/wrossmorrow/envoy-extproc-sdk-go => github.com/izturn/envoy-extproc-sdk-go v0.0.4
